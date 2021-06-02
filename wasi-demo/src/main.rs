@@ -34,9 +34,9 @@ wasmtime --dir=. --dir=/tmp target/wasm32-wasi/debug/wasi-demo.wasm test.txt /tm
 wasmtime --dir=. --mapdir=/tmp::/var/tmp demo.wasm test.txt /tmp/somewhere.txt
 cat /var/tmp/somewhere.txt
 
-wasmtime demo.wat
-wat2wasm demo.wat
-wasmtime demo.wasm
+wasmtime examples/demo.wat
+wat2wasm examples/demo.wat -o examples/demo.wasm
+wasmtime examples/demo.wasm
 
 */
 

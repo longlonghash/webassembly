@@ -43,3 +43,39 @@ fn main() -> Result<()> {
     println!("Done.");
     Ok(())
 }
+
+
+fn main1() -> Result<()> {
+    // All wasm objects operate within the context of a "store"
+    let store = Store::default();
+
+    // Modules can be compiled through either the text or binary format
+    let wat = r#"
+        (module
+            (import "" "" (func $host_hello (param i32)))
+
+            (func (export "hello")
+                i32.const 3
+                call $host_hello)
+        )
+        "#;
+    let module = Module::new(store.engine(), wat)?;
+
+    // Host functions can be defined which take/return wasm values and
+    // execute arbitrary code on the host.
+    let host_hello = Func::wrap(&store, |param: i32| {
+        println!("Got {} from WebAssembly", param);
+    });
+
+    // Instantiation of a module requires specifying its imports and then
+    // afterwards we can fetch exports by name, as well as asserting the
+    // type signature of the function with `get_typed_func`.
+    let instance = Instance::new(&store, &module, &[host_hello.into()])?;
+    let hello = instance.get_typed_func::<(), ()>("hello")?;
+
+    // And finally we can call the wasm as if it were a Rust function!
+    hello.call(())?;
+
+    Ok(())
+}
+

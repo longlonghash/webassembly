@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "wasi-demo",
+    "hello-world",
+]
+
