@@ -2,5 +2,13 @@
 members = [
     "wasi-demo",
     "hello-world",
+    "gcd",
+    "memory",
+    "answer",
+    "log",
+    "wasm-types",
+    "trap",
+    "cdylib",
+    "cdylib-bindgen",
 ]
 
