@@ -10,5 +10,6 @@ members = [
     "trap",
     "cdylib",
     "cdylib-bindgen",
+    "host-function",
 ]
 
