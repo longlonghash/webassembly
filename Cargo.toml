@@ -11,5 +11,9 @@ members = [
     "cdylib",
     "cdylib-bindgen",
     "host-function",
+    "fuel",
+    "threads",
+    "linking",
+    "serialize",
 ]
 
